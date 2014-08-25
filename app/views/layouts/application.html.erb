@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TestApp</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <ul>
+  <% if user_signed_in? %>
+    <li>
+      Witaj <%= User.find(current_user.id).email %>!
+    </li>
+    <li>
+      <%= link_to 'Administracja', '/posts' %>
+    </li>
+    <li>
+    <%= link_to('Wyloguj się', destroy_user_session_path, :method => :delete) %>        
+    </li>
+  <% else %>
+    <li>
+    <%= link_to('Zaloguj się', new_user_session_path)  %>  
+    </li>
+  <% end %>
+  </ul>
+
+<%= yield %>
+
+</body>
+</html>
