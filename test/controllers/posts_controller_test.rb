@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @post = posts(:one)
   end
@@ -18,7 +20,7 @@ class PostsControllerTest < ActionController::TestCase
 
   test "should create post" do
     assert_difference('Post.count') do
-      post :create, post: { body: @post.body, title: @post.title, user_id: @post.user_id, visible: @post.visible }
+      post :create, post: { body: @post.body, title: @post.title, user_id: @post.user_id }
     end
 
     assert_redirected_to post_path(assigns(:post))
